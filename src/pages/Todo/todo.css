@@ -9,10 +9,12 @@
 
 h1 {
     text-align: center;
+    margin-bottom: 15px;
 }
 
 h2 {
     margin-bottom: 10px;
+    margin-top: 30px;
 }
 
 p {
@@ -21,4 +23,45 @@ p {
 
 input {
     box-sizing: border-box;
+}
+
+button {
+    background-color: #333974;
+    color: #fff;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    opacity: 0.8;
+    transition: 0.3s;
+}
+
+button:hover {
+    opacity: 1;
+}
+
+.complete {
+    background-color: #5cb85c;
+}
+
+.remove {
+    background-color: #d9534f;
+}
+
+
+
+.buttons{
+    margin-bottom: 0px;
+}
+
+.todoForm {
+    padding-bottom: 1.5rem;
+}
+
+input, select {
+    padding: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    width: 100%;
 }

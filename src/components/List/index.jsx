@@ -7,9 +7,9 @@ const List = ({todo}) => {
             <p>{todo.text}</p>
             <p>({todo.category})</p>
         </div>
-        <div>
-            <button>Completar</button>
-            <button>X</button>
+        <div className='buttons'>
+            <button className='complete'>Completar</button>
+            <button className='remove'>X</button>
         </div>
     </div>
   )
