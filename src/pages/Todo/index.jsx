@@ -1,4 +1,7 @@
 import {useState} from 'react';
+import './todo.css';
+import List from '../../components/List';
+import TodoForm from '../../components/TodoForm';
 
 export default function Todo(){
 
@@ -24,23 +27,14 @@ export default function Todo(){
     ]);
 
     return(
-        <div>
-            <h1>Todo list</h1>
+        <div className='app'>
+            <h1>Lista de tarefas</h1>
             <div className='todoList'>
                 {todos.map( (todo) => (
-                    <div className='todo'>
-                        <div className='content'>
-                           <p>{todo.text}</p>
-                           <p>({todo.category})</p>
-                        </div>
-                        <div>
-                            <button>Completar</button>
-                            <button>X</button>
-                        </div>
-                    </div>
+                    <List todo={todo}/>
                 ))}
             </div>
-
+                    <TodoForm/>
         </div>
     )
 }
