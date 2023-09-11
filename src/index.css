@@ -6,7 +6,8 @@
 
 body{
   font-family: sans-serif;
-  background-color: #1d1d2e;
+  /*background-color: #1d1d2e;*/
+  background-image: url('./img/city.png');
   background-position: center;
   background-size: cover;
   color : #333;
