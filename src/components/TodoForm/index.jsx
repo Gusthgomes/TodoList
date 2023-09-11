@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
+import './todo.css'
 
-const TodoForm = () => {
+const TodoForm = ({ addTodo }) => {
     const [value, setValue] = useState('');
     const [category, setCategory] = useState('');
 
@@ -8,10 +9,14 @@ const TodoForm = () => {
         e.preventDefault()
         if(value === "" || category === "" || !value || !category){
             alert("Por favor preencha corretamente os campos")
-            setValue('')
-            setCategory('')
+            setValue('');
+            setCategory('');
             return;
         }
+
+        addTodo(value, category);
+        setValue('');
+        setCategory('');
     }
 
   return (

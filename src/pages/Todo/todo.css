@@ -40,6 +40,20 @@ button:hover {
     opacity: 1;
 }
 
+.todoForm {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #555;
+}
+
+.todo {
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 3px;
+    padding: 10px;
+    margin-top: 15px;
+}
+
 .complete {
     background-color: #5cb85c;
 }
@@ -47,8 +61,6 @@ button:hover {
 .remove {
     background-color: #d9534f;
 }
-
-
 
 .buttons{
     margin-bottom: 0px;

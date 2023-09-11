@@ -26,15 +26,30 @@ export default function Todo(){
         }
     ]);
 
+    const addTodo = (text, category) => {
+        const newTodos = [...todos, {
+            id: Math.floor(Math.random() * 10000),
+            text,
+            category,
+            isCompleted: false
+        }
+    ];
+
+    setTodos(newTodos)
+    }
+
     return(
         <div className='app'>
             <h1>Lista de tarefas</h1>
-            <div className='todoList'>
+            <div className='todo'>
                 {todos.map( (todo) => (
-                    <List todo={todo}/>
+                    <List key={todo.id} todo={todo}/>
                 ))}
             </div>
-                    <TodoForm/>
+            <div className='todo-list'>
+                <TodoForm addTodo={addTodo}/>
+            </div>
+                    
         </div>
     )
 }
