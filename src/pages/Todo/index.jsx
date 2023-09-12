@@ -38,12 +38,33 @@ export default function Todo(){
     setTodos(newTodos)
     }
 
+    const removeTodos = (id) => {
+        const newTodos = [...todos]
+        const filterTodos = newTodos.filter(todo => 
+            todo.id !== id ? todo : null);
+            alert("Tarefa deletada com sucesso!")
+        setTodos(filterTodos);
+    }
+
+    const completedTodos = (id) => {
+        const newTodos = [...todos];
+        const filter = newTodos.filter(todo => 
+            todo.id !== id ? todo : null);
+        alert("Tarefa concluída com sucesso!!")
+        setTodos(filter);
+    };
+
     return(
         <div className='app'>
             <h1>Lista de tarefas</h1>
             <div className='todo'>
                 {todos.map( (todo) => (
-                    <List key={todo.id} todo={todo}/>
+                    <List 
+                        key={todo.id} 
+                        todo={todo} 
+                        removeTodo={removeTodos}
+                        completedTodos={completedTodos}
+                    />
                 ))}
             </div>
             <div className='todo-list'>

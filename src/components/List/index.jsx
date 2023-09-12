@@ -1,7 +1,7 @@
 import React from 'react';
 import './list.css';
 
-const List = ({todo}) => {
+const List = ({todo, removeTodo, completedTodos}) => {
   return (
     <div className='todo'>
         <div className='content'>
@@ -9,8 +9,19 @@ const List = ({todo}) => {
             <p>({todo.category})</p>
         </div>
         <div className='buttons'>
-            <button className='complete'>Completar</button>
-            <button className='remove'>X</button>
+            <button 
+            onClick={ () => completedTodos(todo.id) }
+            className='complete'
+            >
+              Completar
+            </button>
+
+            <button 
+            onClick={ () => removeTodo(todo.id) }
+            className='remove'
+            >
+              X
+            </button>
         </div>
     </div>
   )
