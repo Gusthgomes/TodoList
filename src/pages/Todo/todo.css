@@ -51,7 +51,7 @@ button:hover {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 3px;
     padding: 10px;
-    margin-top: 15px;
+    margin-top: 18px;
 }
 
 .complete {
@@ -76,4 +76,16 @@ input, select {
     border: 1px solid #ddd;
     border-radius: 3px;
     width: 100%;
+}
+
+
+@media (max-width: 750px){
+    .app {
+        max-width: 80%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        
+    }
 }
