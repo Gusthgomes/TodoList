@@ -5,26 +5,7 @@ import TodoForm from '../../components/TodoForm';
 
 export default function Todo(){
 
-    const [todos, setTodos] = useState([
-        {
-            id: 1,
-            text: 'criar fincionalidades X no sistema',
-            category: 'trabalho',
-            isCompleted: false,
-        },
-        {
-            id: 2,
-            text: 'Estudar Next JS',
-            category: 'Estudos',
-            isCompleted: false,
-        },
-        {
-             id: 3,
-            text: 'Implementar o Localstorage no projeto',
-            category: 'Trabalho',
-            isCompleted: false,
-        }
-    ]);
+    const [todos, setTodos] = useState([]);
 
     const addTodo = (text, category) => {
         const newTodos = [...todos, {
