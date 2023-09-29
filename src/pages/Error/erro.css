@@ -1,0 +1,21 @@
+a {
+    border: none;
+    text-decoration: none;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    display: flex;
+    margin-top: 15spx;
+    padding: 8px;
+    background-color: #1d1d2b;
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.8s;
+}
+
+a:hover {
+    background-color: #fff;
+    color: #1d1d2b;
+}
