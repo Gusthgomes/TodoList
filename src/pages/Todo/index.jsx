@@ -1,9 +1,9 @@
-import {useState} from 'react';
+import { useState } from 'react';
 import './todo.css';
 import List from '../../components/List';
 import TodoForm from '../../components/TodoForm';
 
-export default function Todo(){
+export default function Todo() {
 
     const [todos, setTodos] = useState([]);
 
@@ -14,44 +14,46 @@ export default function Todo(){
             category,
             isCompleted: false
         }
-    ];
+        ];
 
-    setTodos(newTodos)
+        setTodos(newTodos)
     }
 
     const removeTodos = (id) => {
         const newTodos = [...todos]
-        const filterTodos = newTodos.filter(todo => 
+        const filterTodos = newTodos.filter(todo =>
             todo.id !== id ? todo : null);
-            alert("Tarefa deletada com sucesso!")
+        alert("Tarefa deletada com sucesso!")
         setTodos(filterTodos);
     }
 
     const completedTodos = (id) => {
         const newTodos = [...todos];
-        const filter = newTodos.filter(todo => 
+        const filter = newTodos.filter(todo =>
             todo.id !== id ? todo : null);
         alert("Tarefa concluída com sucesso!!")
         setTodos(filter);
     };
 
-    return(
+    return (
         <div className='app'>
             <h1>Lista de tarefas</h1>
-            <div className='todo'>
-                {todos.map( (todo) => (
-                    <List 
-                        key={todo.id} 
-                        todo={todo} 
-                        removeTodo={removeTodos}
-                        completedTodos={completedTodos}
-                    />
-                ))}
-            </div>
+            {todos.length === 0 ?
+                <div className='empty'> Você não possui nenhuma tarefa no momento! </div> : <div className='todo'>
+                    {todos.map((todo) => (
+                        <List
+                            key={todo.id}
+                            todo={todo}
+                            removeTodo={removeTodos}
+                            completedTodos={completedTodos}
+                        />
+                    ))}
+                </div>}
+
             <div className='todo-list'>
-                <TodoForm addTodo={addTodo}/>
+                <TodoForm addTodo={addTodo} />
             </div>
-                    
+
         </div>
     )
 }

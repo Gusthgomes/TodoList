@@ -1,8 +1,19 @@
 .sobre {
     font-size: 15px;
     font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px;
 }
 
 p {
     text-align: center;
+}
+
+img {
+    padding: 20px;
+    margin-left: 170px;
+    border-radius: 4px;
 }
