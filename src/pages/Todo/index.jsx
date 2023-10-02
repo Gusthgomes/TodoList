@@ -2,6 +2,7 @@ import { useState } from 'react';
 import './todo.css';
 import List from '../../components/List';
 import TodoForm from '../../components/TodoForm';
+import { Link } from 'react-router-dom';
 
 export default function Todo() {
 
@@ -53,6 +54,11 @@ export default function Todo() {
             <div className='todo-list'>
                 <TodoForm addTodo={addTodo} />
             </div>
+            <footer>
+                <div className='header'>
+                    <Link to="/sobre">Para mais informações clique aqui!</Link>
+                </div>
+            </footer>
 
         </div>
     )
