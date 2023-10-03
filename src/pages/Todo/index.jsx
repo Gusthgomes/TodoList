@@ -32,7 +32,7 @@ export default function Todo() {
         const newTodos = [...todos];
         const filter = newTodos.filter(todo =>
             todo.id !== id ? todo : null);
-        alert("Tarefa concluída com sucesso!!")
+        alert("Tarefa concluída com sucesso!")
         setTodos(filter);
     };
 
