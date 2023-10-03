@@ -8,7 +8,7 @@ const index = () => {
       <div className='head'>
         <img src='foto.png' alt='foto' className='foto' />
         <h1>Sobre mim...</h1>
-
+      
         <div className='info'>
           <p>
             Olá, me chamo Gustavo Gomes e tenho 27 anos, trabalho com programação já fazem 2 anos e tenho familiaridade com Python, React e Typescript. Essa aplicação foi construída usando React JS e sua utilização é criar listas de tarefas.

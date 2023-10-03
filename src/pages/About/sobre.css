@@ -1,19 +1,30 @@
 .sobre {
-    font-size: 15px;
-    font-weight: bold;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border-radius: 4px;
+    max-width: 600px;
+}
+
+.head {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 p {
+    max-width: 570px;
     text-align: center;
 }
 
-img {
-    padding: 20px;
+.foto {
+    height: 220px;
+    width: 220px;
+    padding: 5px;
     margin-left: 170px;
-    border-radius: 4px;
+    margin-right: 170px;
+    max-width: 580px;
+    margin-bottom: 10px;
 }
+
