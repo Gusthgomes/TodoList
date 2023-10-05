@@ -3,7 +3,7 @@ import './todo.css';
 import TodoForm from '../../components/TodoForm';
 import { Link } from 'react-router-dom';
 import { db } from '../../firebaseConnection';
-import { getDocs, collection } from 'firebase/firestore';
+import { getDocs, collection, deleteDoc, doc } from 'firebase/firestore';
 
 export default function Todo() {
 
@@ -22,20 +22,26 @@ export default function Todo() {
         setTodos(newTodos)
     }
 
-    const removeTodos = (id) => {
-        const newTodos = [...todos]
-        const filterTodos = newTodos.filter(todo =>
-            todo.id !== id ? todo : null);
-        alert("Tarefa deletada com sucesso!")
-        setTodos(filterTodos);
+    async function removeTodos(id) {
+        const docRef = doc(db, "lista", id)
+        await deleteDoc(docRef)
+        .then(()=>{
+            alert(" Tarefa deletada com sucesso!")
+        })
+        .catch((error) => {
+            alert("Ops! Algo deu errado... " + error)
+        })
     }
 
-    const completedTodos = (id) => {
-        const newTodos = [...todos];
-        const filter = newTodos.filter(todo =>
-            todo.id !== id ? todo : null);
-        alert("Tarefa concluída com sucesso!")
-        setTodos(filter);
+    async function completedTodos(id) {
+        const docRef = doc(db, "lista", id)
+        await deleteDoc(docRef)
+        .then(()=>{
+            alert(" Tarefa concluída com sucesso!")
+        })
+        .catch((error) => {
+            alert("Ops! Algo deu errado... " + error)
+        })
     };
 
     useEffect(() => {
@@ -53,6 +59,7 @@ export default function Todo() {
                     })
 
                     setTarefas(lista);
+                    setTodos([...lista])
                     console.log("Itens carregados!")
 
                 })
@@ -79,14 +86,14 @@ export default function Todo() {
                                 
                                 <div className='areaButton'>
                                     <button
-                                        //onClick={() => completedTodos(tarefas.id)}
+                                        onClick={() => completedTodos(tarefa.id)}
                                         className='complete'
                                     >
                                         Completar
                                     </button>
 
                                     <button
-                                        //onClick={() => removeTodo(tarefas.id)}
+                                        onClick={() => removeTodos(tarefa.id)}
                                         className='remove'
                                     >
                                         X
