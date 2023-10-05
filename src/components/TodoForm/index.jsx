@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import './todo.css'
-import { toast } from 'react-toastify';
+import { db } from '../../firebaseConnection';
+import { collection, addDoc } from 'firebase/firestore';
 
 const TodoForm = ({ addTodo }) => {
     const [value, setValue] = useState('');
@@ -8,6 +9,18 @@ const TodoForm = ({ addTodo }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
+        addDoc(collection(db, "lista"), {
+
+            tarefa: value,
+            categoria: category,
+        })
+        .then( () => {
+            console.log("Itens cadastrados com sucesso!")
+        })
+        .catch( (error) => {
+            console.error("Algo deu errado " + error )
+        })
+
         if(value === "" || category === "" || !value || !category){
             alert("Por favor preencha corretamente os campos")
             setValue('');

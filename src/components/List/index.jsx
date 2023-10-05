@@ -1,23 +1,22 @@
 import React from 'react';
-import './list.css';
 
-const List = ({todo, removeTodo, completedTodos}) => {
+const List = ({tarefas, removeTodo, completedTodos}) => {
   return (
     <div className='todo'>
         <div className='content'>
-            <p>{todo.text}</p>
-            <p>({todo.category})</p>
+            <p>{tarefas.text}</p>
+            <p>({tarefas.category})</p>
         </div>
         <div className='buttons'>
             <button 
-            onClick={ () => completedTodos(todo.id) }
+            onClick={ () => completedTodos(tarefas.id) }
             className='complete'
             >
               Completar
             </button>
 
             <button 
-            onClick={ () => removeTodo(todo.id) }
+            onClick={ () => removeTodo(tarefas.id) }
             className='remove'
             >
               X

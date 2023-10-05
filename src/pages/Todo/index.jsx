@@ -1,12 +1,14 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './todo.css';
-import List from '../../components/List';
 import TodoForm from '../../components/TodoForm';
 import { Link } from 'react-router-dom';
+import { db } from '../../firebaseConnection';
+import { getDocs, collection } from 'firebase/firestore';
 
 export default function Todo() {
 
     const [todos, setTodos] = useState([]);
+    const [tarefas, setTarefas] = useState([]);
 
     const addTodo = (text, category) => {
         const newTodos = [...todos, {
@@ -36,19 +38,64 @@ export default function Todo() {
         setTodos(filter);
     };
 
+    useEffect(() => {
+        async function buscarTarefas() {
+            const taskRef = collection(db, "lista")
+            await getDocs(taskRef)
+                .then((snapshot) => {
+                    let lista = []
+                    snapshot.forEach((doc) => {
+                        lista.push({
+                            id: doc.id,
+                            tarefa: doc.data().tarefa,
+                            categoria: doc.data().categoria
+                        })
+                    })
+
+                    setTarefas(lista);
+                    console.log("Itens carregados!")
+
+                })
+                .catch((error) => {
+                    console.error("Não foi possível buscar as informações do banco " + error)
+                })
+        }
+        buscarTarefas();
+    }, [])
+
     return (
         <div className='app'>
             <h1>Lista de tarefas</h1>
-            {todos.length === 0 ?
+            {tarefas.length === 0 ?
                 <div className='empty'> Você não possui nenhuma tarefa no momento! </div> : <div className='todo'>
-                    {todos.map((todo) => (
-                        <List
-                            key={todo.id}
-                            todo={todo}
-                            removeTodo={removeTodos}
-                            completedTodos={completedTodos}
-                        />
-                    ))}
+                    {tarefas.map((tarefa) => {
+                        return (
+                            <div key={tarefa.id} className='content'>
+
+                                <div className='paragrafo'>
+                                    <p>{tarefa.tarefa}</p>
+                                    <p>({tarefa.categoria})</p>
+                                </div>
+                                
+                                <div className='areaButton'>
+                                    <button
+                                        //onClick={() => completedTodos(tarefas.id)}
+                                        className='complete'
+                                    >
+                                        Completar
+                                    </button>
+
+                                    <button
+                                        //onClick={() => removeTodo(tarefas.id)}
+                                        className='remove'
+                                    >
+                                        X
+                                    </button>
+                                </div>
+                            </div>
+
+                        )
+                    })}
                 </div>}
 
             <div className='todo-list'>
