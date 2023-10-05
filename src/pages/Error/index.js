@@ -9,7 +9,7 @@ const Error = () => {
         <img src='404.png' alt='error' className='not'/>
       </div>
       <p>Ops!!!! Você se deu mal e foi para aonde não deveria......</p>
-      <Link to="/">Clique aqui para Home</Link>
+      <Link to="/">Clique aqui para voltar</Link>
     </div>
   )
 }
