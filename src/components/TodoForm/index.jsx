@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import './todo.css'
 import { db } from '../../firebaseConnection';
-import { collection, addDoc } from 'firebase/firestore';
+import { collection, addDoc, getDocs } from 'firebase/firestore';
 
 const TodoForm = ({ addTodo }) => {
     const [value, setValue] = useState('');
@@ -9,17 +9,6 @@ const TodoForm = ({ addTodo }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        addDoc(collection(db, "lista"), {
-
-            tarefa: value,
-            categoria: category,
-        })
-        .then( () => {
-            console.log("Itens cadastrados com sucesso!")
-        })
-        .catch( (error) => {
-            console.error("Algo deu errado " + error )
-        })
 
         if(value === "" || category === "" || !value || !category){
             alert("Por favor preencha corretamente os campos")
@@ -27,6 +16,24 @@ const TodoForm = ({ addTodo }) => {
             setCategory('');
             return;
         }
+
+        if(value.length <= 0 || category.length <= 0){
+            alert("dados indefinidos, favor corrigir!")
+            setValue('');
+            setCategory('');
+            return;
+        }
+        addDoc(collection(db, "lista"), {
+
+            tarefa: value,
+            categoria: category,
+        })
+        .then( () => {
+            alert("Tarefa cadastrada com sucesso!")
+        })
+        .catch( (error) => {
+            console.error("Algo deu errado " + error )
+        })
 
         addTodo(value, category);
         setValue('');
@@ -55,6 +62,7 @@ const TodoForm = ({ addTodo }) => {
             </select>
             <button type="submit">Criar tarefa</button>
         </form>
+        
     </div>
   )
 }

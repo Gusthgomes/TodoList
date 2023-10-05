@@ -44,6 +44,28 @@ export default function Todo() {
         })
     };
 
+    async function handelUpdate(){
+        const tarefaRef = collection(db, "lista")
+
+        await getDocs(tarefaRef)
+        .then((snapshot) => {
+            let lista =[]
+            snapshot.forEach((doc) => {
+                lista.push({
+                    id: doc.id,
+                    tarefa: doc.data().tarefa,
+                    categoria: doc.data().categoria
+                })
+            })
+
+            setTarefas(lista)
+            
+        })
+        .catch((error) => {
+            console.log("Erro ao atualizar " + error)
+        })
+    }
+
     useEffect(() => {
         async function buscarTarefas() {
             const taskRef = collection(db, "lista")
@@ -72,7 +94,11 @@ export default function Todo() {
 
     return (
         <div className='app'>
-            <h1>Lista de tarefas</h1>
+            <div className='cabeca'>
+                <h1>Lista de tarefas</h1>
+                <button type="text" className='update' onClick={handelUpdate}>Atualizar</button>
+            </div>
+            
             {tarefas.length === 0 ?
                 <div className='empty'> Você não possui nenhuma tarefa no momento! </div> : <div className='todo'>
                     {tarefas.map((tarefa) => {

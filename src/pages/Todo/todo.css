@@ -41,6 +41,13 @@ button:hover {
     opacity: 1;
 }
 
+.cabeca{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
 .todoForm {
     margin-bottom: 20px;
     padding-bottom: 20px;
