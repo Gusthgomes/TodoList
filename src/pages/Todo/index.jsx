@@ -3,7 +3,8 @@ import './todo.css';
 import TodoForm from '../../components/TodoForm';
 import { Link } from 'react-router-dom';
 import { db } from '../../firebaseConnection';
-import { getDocs, collection, deleteDoc, doc } from 'firebase/firestore';
+import { collection, deleteDoc, doc, onSnapshot } from 'firebase/firestore';
+import { toast } from 'react-toastify';
 
 export default function Todo() {
 
@@ -26,10 +27,10 @@ export default function Todo() {
         const docRef = doc(db, "lista", id)
         await deleteDoc(docRef)
         .then(()=>{
-            alert(" Tarefa deletada com sucesso!")
+            toast.success(" Tarefa deletada com sucesso!");
         })
         .catch((error) => {
-            alert("Ops! Algo deu errado... " + error)
+            toast.error("Ops! Algo deu errado... " + error);
         })
     }
 
@@ -37,57 +38,30 @@ export default function Todo() {
         const docRef = doc(db, "lista", id)
         await deleteDoc(docRef)
         .then(()=>{
-            alert(" Tarefa concluída com sucesso!")
+            toast.success(" Tarefa concluída com sucesso!");
         })
         .catch((error) => {
-            alert("Ops! Algo deu errado... " + error)
+            toast.error("Ops! Algo deu errado... " + error);
         })
     };
 
-    async function handelUpdate(){
-        const tarefaRef = collection(db, "lista")
-
-        await getDocs(tarefaRef)
-        .then((snapshot) => {
-            let lista =[]
-            snapshot.forEach((doc) => {
-                lista.push({
-                    id: doc.id,
-                    tarefa: doc.data().tarefa,
-                    categoria: doc.data().categoria
-                })
-            })
-
-            setTarefas(lista)
-            
-        })
-        .catch((error) => {
-            console.log("Erro ao atualizar " + error)
-        })
-    }
-
+    
     useEffect(() => {
         async function buscarTarefas() {
             const taskRef = collection(db, "lista")
-            await getDocs(taskRef)
-                .then((snapshot) => {
-                    let lista = []
-                    snapshot.forEach((doc) => {
-                        lista.push({
-                            id: doc.id,
-                            tarefa: doc.data().tarefa,
-                            categoria: doc.data().categoria
-                        })
+            const onsub = onSnapshot(taskRef, (snapshot) => {
+                
+                let list = [];
+
+                snapshot.forEach( (doc) => {
+                    list.push({
+                        id: doc.id,
+                        tarefa: doc.data().tarefa,
+                        categoria: doc.data().categoria
                     })
-
-                    setTarefas(lista);
-                    setTodos([...lista])
-                    console.log("Itens carregados!")
-
                 })
-                .catch((error) => {
-                    console.error("Não foi possível buscar as informações do banco " + error)
-                })
+                setTarefas(list)
+            })
         }
         buscarTarefas();
     }, [])
@@ -95,8 +69,7 @@ export default function Todo() {
     return (
         <div className='app'>
             <div className='cabeca'>
-                <h1>Lista de tarefas</h1>
-                <button type="text" className='update' onClick={handelUpdate}>Atualizar</button>
+                <h1>LISTA DE TAREFAS</h1>
             </div>
             
             {tarefas.length === 0 ?

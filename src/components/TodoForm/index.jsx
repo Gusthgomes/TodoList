@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import './todo.css'
 import { db } from '../../firebaseConnection';
-import { collection, addDoc, getDocs } from 'firebase/firestore';
+import { collection, addDoc } from 'firebase/firestore';
+import { toast } from 'react-toastify';
 
 const TodoForm = ({ addTodo }) => {
     const [value, setValue] = useState('');
@@ -11,14 +12,14 @@ const TodoForm = ({ addTodo }) => {
         e.preventDefault()
 
         if(value === "" || category === "" || !value || !category){
-            alert("Por favor preencha corretamente os campos")
+            toast.warning("Por favor preencha corretamente os campos");
             setValue('');
             setCategory('');
             return;
         }
 
         if(value.length <= 0 || category.length <= 0){
-            alert("dados indefinidos, favor corrigir!")
+            toast.info("dados indefinidos, favor corrigir!");
             setValue('');
             setCategory('');
             return;
@@ -29,10 +30,11 @@ const TodoForm = ({ addTodo }) => {
             categoria: category,
         })
         .then( () => {
-            alert("Tarefa cadastrada com sucesso!")
+            toast.success("Tarefa cadastrada com sucesso!");
         })
         .catch( (error) => {
             console.error("Algo deu errado " + error )
+            toast.error("Ops! Parece que algo deu errado....")
         })
 
         addTodo(value, category);
@@ -56,9 +58,12 @@ const TodoForm = ({ addTodo }) => {
                 onChange={(e) => setCategory(e.target.value)}
             >
                 <option value="">Selecione uma categoria</option>
-                <option value="Trabalho">Trabalho</option>
-                <option value="Estudo">Estudo</option>
-                <option value="Pessoal">Pessoal</option>
+                <option value="SGE">SGE</option>
+                <option value="MHC2">MHC2</option>
+                <option value="SOFTWARE">SOFTWARE</option>
+                <option value="GESTAO">GESTÃO</option>
+                <option value="SUPORTE">SUPORTE</option>
+                <option value="TI">TI</option>
             </select>
             <button type="submit">Criar tarefa</button>
         </form>
